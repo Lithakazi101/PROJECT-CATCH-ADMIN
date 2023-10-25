@@ -1,13 +1,13 @@
 
-// import { 
-//     hideLoginError, 
-//     showLoginState, 
-//     showLoginForm, 
-//     showApp, 
-//     showLoginError, 
-//     btnSignup,
-//     btnLogout
-//   } from './script.js'
+import { 
+    hideLoginError, 
+    showLoginState, 
+    showLoginForm, 
+    showApp, 
+    showLoginError, 
+    btnSignup,
+    btnLogout
+  } from './script.js'
   
 import { initializeApp } from '@firebase/app';
 import {
@@ -98,15 +98,15 @@ const monitorAuthState = () => {
     onAuthStateChanged(auth, user => {
       if (user) {
         console.log(user);
-        // showApp();
-        // showLoginState(user);
+        showApp();
+        showLoginState(user);
   
-        // hideLoginError();
+        hideLoginError();
     
       }
       else {
-        // showLoginForm();
-        // lblAuthState.innerHTML = `You're not logged in.`;
+        showLoginForm();
+        lblAuthState.innerHTML = `You're not logged in.`;
         console.log('bad bad')
       }
     });
