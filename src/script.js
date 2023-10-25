@@ -13,6 +13,9 @@ export const lblAuthState = document.querySelector('#lblAuthState')
 
 export const divLoginError = document.querySelector('#divLoginError')
 export const lblLoginErrorMessage = document.querySelector('#lblLoginErrorMessage')
+export const visitorList = document.getElementById('visitorList');
+
+
 
 export const showLoginForm = () => {
   login.style.display = 'block'
@@ -43,4 +46,15 @@ export const showLoginState = (user) => {
   lblAuthState.innerHTML = `You're logged in as  (uid: ${user.uid}, email: ${user.email}) `
 }
 
+
+export const renderVisitorCard = (visitor) => {
+    const visitorCard = document.createElement('div');
+    visitorCard.classList.add('visitor-card');
+    visitorCard.innerHTML = `
+      <h2>${visitor.firstName} ${visitor.surName}</h2>
+      <p><strong>Created At:</strong> ${new Date(visitor.createdAt.seconds * 1000)}</p>
+    `;
+    return visitorCard;
+  };
+  
 hideLoginError()

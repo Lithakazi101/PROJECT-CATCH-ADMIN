@@ -6,7 +6,8 @@ import {
     showApp, 
     showLoginError, 
     btnSignup,
-    btnLogout
+    btnLogout,
+    renderVisitorCard
   } from './script.js'
   
 import { initializeApp } from '@firebase/app';
@@ -66,17 +67,17 @@ const colRef = collection(db, 'visitors')
 //                 console.log('erro found')
 //             })
 // })
-const btnLogin = document.querySelector('.login-form'); // Select the form element, not the button
+const btnLogin = document.querySelector('.login-form'); 
 console.log("hi");
 
-btnLogin.addEventListener('submit', async (e) => { // Use 'submit' event on the form
+btnLogin.addEventListener('submit', async (e) => { 
     e.preventDefault();
 
-    const email = document.querySelector('#email').value; // Access email field using its ID
-    const password = document.querySelector('#password').value; // Access password field using its ID
+    const email = document.querySelector('#email').value; 
+    const password = document.querySelector('#password').value; 
 
     try {
-        const cred = await signInWithEmailAndPassword(auth, email, password); // Use 'await' for Firebase method
+        const cred = await signInWithEmailAndPassword(auth, email, password); 
         console.log('User logged in:', cred.user);
     } catch (error) {
         console.error('Error:', error);
@@ -94,14 +95,16 @@ logoutButton.addEventListener('click', () => {
             console.log(error.message)
         })
 })
+console.log('happy happy')
+
 const monitorAuthState = () => {
     onAuthStateChanged(auth, user => {
       if (user) {
         console.log(user);
         showApp();
         showLoginState(user);
-  
         hideLoginError();
+        renderVisitorCard();
     
       }
       else {
@@ -114,10 +117,20 @@ const monitorAuthState = () => {
   
 monitorAuthState(); 
 
+// onSnapshot(colRef, (snapshot) => {
+//   let visitors = []
+//   snapshot.docs.forEach(doc => {
+//     visitors.push({ ...doc.data(), id: doc.id })
+//   })
+// //   console.log(visitors)
+// })
+
 onSnapshot(colRef, (snapshot) => {
-  let visitors = []
-  snapshot.docs.forEach(doc => {
-    visitors.push({ ...doc.data(), id: doc.id })
-  })
-//   console.log(visitors)
-})
+    visitorList.innerHTML = ''; // Clear the previous data
+  
+    snapshot.docs.forEach((doc) => {
+      const visitor = { ...doc.data(), id: doc.id };
+      const visitorCard = renderVisitorCard(visitor);
+      visitorList.appendChild(visitorCard);
+    });
+  });
