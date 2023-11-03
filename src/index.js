@@ -7,7 +7,9 @@ import {
     showLoginError, 
     btnSignup,
     btnLogout,
+    detailedList,
     renderVisitorCard
+ 
   } from './script.js'
   
 import { initializeApp } from '@firebase/app';
@@ -50,6 +52,7 @@ const auth = getAuth()
 //collection ref
 const colRef = collection(db, 'visitors')
 
+
 //queries
 // const q = query(colRef, orderBy('surName','asc'));
 // const btnLogin = document.querySelector('#btnLogin')
@@ -72,7 +75,7 @@ console.log("hi");
 
 btnLogin.addEventListener('submit', async (e) => { 
     e.preventDefault();
-
+     
     const email = document.querySelector('#email').value; 
     const password = document.querySelector('#password').value; 
 
@@ -83,6 +86,11 @@ btnLogin.addEventListener('submit', async (e) => {
         console.error('Error:', error);
     }
 });
+
+
+
+
+// Call the viewPage function when the document is ready, for example:
 
 
 const logoutButton =document.querySelector('#btnLogout')
@@ -100,31 +108,35 @@ console.log('happy happy')
 const monitorAuthState = () => {
     onAuthStateChanged(auth, user => {
       if (user) {
-        console.log(user);
+
         showApp();
         showLoginState(user);
         hideLoginError();
-        renderVisitorCard();
-    
+        detailedList();
+
       }
       else {
         showLoginForm();
         lblAuthState.innerHTML = `You're not logged in.`;
         console.log('bad bad')
+       
       }
     });
   };
   
 monitorAuthState(); 
+console.log('heeey')
 
 // onSnapshot(colRef, (snapshot) => {
 //   let visitors = []
 //   snapshot.docs.forEach(doc => {
 //     visitors.push({ ...doc.data(), id: doc.id })
 //   })
-// //   console.log(visitors)
+//   console.log(visitors)
 // })
 
+
+const visitorList = document.getElementById('viewPage');
 onSnapshot(colRef, (snapshot) => {
     visitorList.innerHTML = ''; // Clear the previous data
   
@@ -134,3 +146,5 @@ onSnapshot(colRef, (snapshot) => {
       visitorList.appendChild(visitorCard);
     });
   });
+
+

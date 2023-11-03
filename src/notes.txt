@@ -51,3 +51,7 @@ var firebase = require('firebase');
 var firebaseui = require('firebaseui');
 
 var ui = new firebaseui.auth.AuthUI(firebase.auth());
+
+
+//User Login message
+You're logged in as  (uid: ${user.firstName}, email: ${user.email})
