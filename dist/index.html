@@ -20,19 +20,31 @@
             <button type="submit" id="btnLogin">Login</button>
         </form>
         </div>
-        <div id="divLoginError" class="group">
+        <!-- <div id="divLoginError" class="group">
             <div id="lblLoginErrorMessage" class="errorlabel">Error</div>
-          </div>
+          </div> -->
           <div id="app">
-            <form>
-              <div id="viewPage">
+            <main id="viewPage">
+      
+              <div id="lblAuthState" class="authlabel"> 
+                
+                <div class="visitor-list lanes" id="visitorList"></div>
+              
+              <div id="contacted" class="lanes">
+                <h2 id="contacted" class="check">Contacted</h2>
+              </div>
+             
+              <div id="onHoliday" class="lanes">
+                <h2>On onHoliday</h2>
 
               </div>
-              
+              </div>
+            </main>
+
+            <form>
+           
             <div class="group">
-              <div id="lblAuthState" class="authlabel">
-                <h1>Visitor List</h1>
-                <div class="visitor-list" id="visitorList"></div>
+             
               </div>
             </div>
             <button id="btnLogout" type="button" class="button buttonBlue" href="">Logout</button>
@@ -42,6 +54,7 @@
           </div>
     </div>
     
-        <script type="module" src="bundle.js" ></script>
+        <script type="module" src="bundle.js" async></script>
 </body>
 </html>
+

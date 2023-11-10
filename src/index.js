@@ -1,14 +1,15 @@
 
 import { 
     hideLoginError, 
-    showLoginState, 
+    // showLoginState, 
     showLoginForm, 
     showApp, 
     showLoginError, 
     btnSignup,
     btnLogout,
     detailedList,
-    renderVisitorCard
+    renderVisitorCard,
+    draggables
  
   } from './script.js'
   
@@ -29,10 +30,7 @@ import {
 
   } from 'firebase/auth'
 
-  
-  
 
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
     apiKey: "AIzaSyA5Q0URpXWCwGZDGg8KfHRaVR9RdkWCbDY",
     authDomain: "project-catch-43bb7.firebaseapp.com",
@@ -53,23 +51,7 @@ const auth = getAuth()
 const colRef = collection(db, 'visitors')
 
 
-//queries
-// const q = query(colRef, orderBy('surName','asc'));
-// const btnLogin = document.querySelector('#btnLogin')
-// console.log("hi")
-// btnLogin.addEventListener('submit',(e) => {
-//     e.preventDefault()
-//     const email = btnLogin.email.value
-//     const password = btnLogin.password.value
-//     console.log("hi")
-//     signInWithEmailAndPassword(auth,email,password)
-//             .then((cred) =>{
-//                 console.log('here we are',cred.user)
-//             })
-//             .catch(()=> {
-//                 console.log('erro found')
-//             })
-// })
+
 const btnLogin = document.querySelector('.login-form'); 
 console.log("hi");
 
@@ -90,8 +72,6 @@ btnLogin.addEventListener('submit', async (e) => {
 
 
 
-// Call the viewPage function when the document is ready, for example:
-
 
 const logoutButton =document.querySelector('#btnLogout')
 logoutButton.addEventListener('click', () => {
@@ -108,15 +88,16 @@ console.log('happy happy')
 const monitorAuthState = () => {
     onAuthStateChanged(auth, user => {
       if (user) {
-
+      
         showApp();
-        showLoginState(user);
+        // showLoginState(user);
         hideLoginError();
-        detailedList();
+        draggables()
 
       }
       else {
         showLoginForm();
+       
         lblAuthState.innerHTML = `You're not logged in.`;
         console.log('bad bad')
        
@@ -124,19 +105,14 @@ const monitorAuthState = () => {
     });
   };
   
-monitorAuthState(); 
+monitorAuthState();
 console.log('heeey')
 
-// onSnapshot(colRef, (snapshot) => {
-//   let visitors = []
-//   snapshot.docs.forEach(doc => {
-//     visitors.push({ ...doc.data(), id: doc.id })
-//   })
-//   console.log(visitors)
-// })
 
+document.addEventListener('DOMContentLoaded', function() {
+  // Init app
+});
 
-const visitorList = document.getElementById('viewPage');
 onSnapshot(colRef, (snapshot) => {
     visitorList.innerHTML = ''; // Clear the previous data
   
@@ -146,5 +122,4 @@ onSnapshot(colRef, (snapshot) => {
       visitorList.appendChild(visitorCard);
     });
   });
-
 

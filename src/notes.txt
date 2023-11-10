@@ -55,3 +55,80 @@ var ui = new firebaseui.auth.AuthUI(firebase.auth());
 
 //User Login message
 You're logged in as  (uid: ${user.firstName}, email: ${user.email})
+
+
+STYLING
+
+
+/* .container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    text-align: center;
+} */
+
+h1 {
+    margin-bottom: 20px;
+}
+main{
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+
+}
+.visitor-card{
+    border: #0056b3;
+    background-color: gainsboro;
+    margin-right: 14px;
+    border-radius: 4px;
+
+
+}
+/* label, input, button {
+    display: block;
+    margin: 10px 0;
+} */
+
+/* button {
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s; /* Add transition for a smooth effect */
+/* } */ 
+
+button:hover {
+    background-color: #0056b3; /* Change background color on hover */
+}
+
+.error-message {
+    color: red;
+}
+
+/* Style the logout button */
+.logout-button {
+    background-color: #dc3545; /* Red color for the logout button */
+}
+
+.logout-button:hover {
+    background-color: #a71b1b; /* Darker red color on hover */
+}
+//queries
+// const q = query(colRef, orderBy('surName','asc'));
+// const btnLogin = document.querySelector('#btnLogin')
+// console.log("hi")
+// btnLogin.addEventListener('submit',(e) => {
+//     e.preventDefault()
+//     const email = btnLogin.email.value
+//     const password = btnLogin.password.value
+//     console.log("hi")
+//     signInWithEmailAndPassword(auth,email,password)
+//             .then((cred) =>{
+//                 console.log('here we are',cred.user)
+//             })
+//             .catch(()=> {
+//                 console.log('erro found')
+//             })
+// })
