@@ -16,11 +16,8 @@ export const divLoginError = document.querySelector('#divLoginError')
 export const lblLoginErrorMessage = document.querySelector('#lblLoginErrorMessage')
 
 //Visitor SIgn in Divs
-export const visitorList = document.querySelector('#signedIn');
-// export const signedIn = document.getElementById('signedIn');
-// const signedInUser = document.createElement('h1');
-// signedInUser.innerHTML = 'Signed Users';
-// document.getElementById('signedIn').appendChild(signedInUser);
+export const visitorList = document.querySelector('#visitorList');
+
 
 
 export const showLoginForm = () => {

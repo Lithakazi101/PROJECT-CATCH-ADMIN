@@ -53,7 +53,7 @@ const colRef = collection(db, 'visitors')
 
 
 const btnLogin = document.querySelector('.login-form'); 
-console.log("hi");
+
 
 btnLogin.addEventListener('submit', async (e) => { 
     e.preventDefault();
@@ -69,7 +69,42 @@ btnLogin.addEventListener('submit', async (e) => {
     }
 });
 
+const visitorList = document.querySelector('#visitorList');
 
+
+
+const monitorAuthState = async() => {
+    onAuthStateChanged(auth, user => {
+ 
+      if (user) {
+        onSnapshot(colRef, (snapshot) => {
+          visitorList.innerHTML = ''; // Clear the previous data
+        
+            snapshot.docs.forEach((doc) => {
+              const visitor = { ...doc.data(), id: doc.id };
+              const visitorCard = renderVisitorCard(visitor);
+              visitorList.appendChild(visitorCard);
+              console.log(visitorCard)
+            });
+          });
+        renderVisitorCard(user)
+        showApp();
+        
+        // hideLoginError();
+        draggables()
+
+      }
+      else {
+        showLoginForm();
+       
+        lblAuthState.innerHTML = `You're not logged in.`;
+        console.log('bad bad')
+       
+      }
+    });
+  };
+  
+monitorAuthState();
 
 
 
@@ -85,41 +120,4 @@ logoutButton.addEventListener('click', () => {
 })
 console.log('happy happy')
 
-const monitorAuthState = () => {
-    onAuthStateChanged(auth, user => {
-      if (user) {
-      
-        showApp();
-        // showLoginState(user);
-        hideLoginError();
-        draggables()
-
-      }
-      else {
-        showLoginForm();
-       
-        lblAuthState.innerHTML = `You're not logged in.`;
-        console.log('bad bad')
-       
-      }
-    });
-  };
-  
-monitorAuthState();
-console.log('heeey')
-
-
-document.addEventListener('DOMContentLoaded', function() {
-  // Init app
-});
-
-onSnapshot(colRef, (snapshot) => {
-    visitorList.innerHTML = ''; // Clear the previous data
-  
-    snapshot.docs.forEach((doc) => {
-      const visitor = { ...doc.data(), id: doc.id };
-      const visitorCard = renderVisitorCard(visitor);
-      visitorList.appendChild(visitorCard);
-    });
-  });
 
